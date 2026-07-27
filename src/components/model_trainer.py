@@ -57,10 +57,69 @@ class ModelTrainer:
                 "CatBoost Classifier": CatBoostClassifier(verbose=False),
                 "XGBoost Classifier": XGBClassifier()
             }
+            params = {
+                "Logistic Regression": {
+                "C": [0.01, 0.1, 1, 10, 100],
+                "solver": ["liblinear", "lbfgs"]
+                },
+
+                "Decision Tree": {
+                "criterion": ["gini", "entropy", "log_loss"],
+                "max_depth": [None, 5, 10, 20],
+                "min_samples_split": [2, 5, 10],
+                "min_samples_leaf": [1, 2, 4]
+                },
+
+                "Random Forest": {
+                "n_estimators": [50, 100, 200],
+                "max_depth": [None, 10, 20],
+                "min_samples_split": [2, 5],
+                "min_samples_leaf": [1, 2]
+                },
+
+                "Gradient Boosting": {
+                "learning_rate": [0.01, 0.05, 0.1],
+                "n_estimators": [50, 100, 200],
+                "max_depth": [3, 5, 7]
+                },
+
+                "AdaBoost": {
+                "n_estimators": [50, 100, 200],
+                "learning_rate": [0.01, 0.1, 1.0]
+                },
+
+                "XGBoost": {
+                "learning_rate": [0.01, 0.05, 0.1],
+                "n_estimators": [50, 100, 200],
+                "max_depth": [3, 5, 7]
+                },
+
+                "CatBoost": {
+                "depth": [4, 6, 8],
+                "learning_rate": [0.01, 0.05, 0.1],
+                "iterations": [100, 200, 500]
+                },
+
+                "SVM": {
+                "C": [0.1, 1, 10],
+                "kernel": ["linear", "rbf"],
+                "gamma": ["scale", "auto"]
+                },
+
+                "K Nearest Neighbors": {
+                "n_neighbors": [3, 5, 7, 9, 11],
+                "weights": ["uniform", "distance"],
+                "metric": ["euclidean", "manhattan", "minkowski"]
+                },
+
+                "Gaussian Naive Bayes": {
+                "var_smoothing": [1e-9, 1e-8, 1e-7, 1e-6]
+                }
+            }
             LabelEncoder_y = LabelEncoder()
             y_train = LabelEncoder_y.fit_transform(y_train)
             y_test = LabelEncoder_y.transform(y_test)
-            model_report: dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+            model_report: dict = evaluate_models(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models,param=params)
             
             #to get best model score and name from dict
             best_model_score = max(sorted(model_report.values()))
