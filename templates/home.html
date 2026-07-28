@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+    <h2>Customer Details</h2>
+
+    <label>Age</label>
+    <input type="number" name="age" required><br><br>
+
+    <label>Job</label>
+    <select name="job" required>
+        <option value="admin.">Admin</option>
+        <option value="blue-collar">Blue Collar</option>
+        <option value="entrepreneur">Entrepreneur</option>
+        <option value="housemaid">Housemaid</option>
+        <option value="management">Management</option>
+        <option value="retired">Retired</option>
+        <option value="self-employed">Self Employed</option>
+        <option value="services">Services</option>
+        <option value="student">Student</option>
+        <option value="technician">Technician</option>
+        <option value="unemployed">Unemployed</option>
+        <option value="unknown">Unknown</option>
+    </select><br><br>
+
+    <label>Marital Status</label>
+    <select name="marital" required>
+        <option value="married">Married</option>
+        <option value="single">Single</option>
+        <option value="divorced">Divorced</option>
+    </select><br><br>
+
+    <label>Education</label>
+    <select name="education" required>
+        <option value="primary">Primary</option>
+        <option value="secondary">Secondary</option>
+        <option value="tertiary">Tertiary</option>
+        <option value="unknown">Unknown</option>
+    </select><br><br>
+
+    <label>Credit in Default</label>
+    <select name="default" required>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select><br><br>
+
+    <label>Average Yearly Balance</label>
+    <input type="number" name="balance" required><br><br>
+
+    <label>Housing Loan</label>
+    <select name="housing" required>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select><br><br>
+
+    <label>Personal Loan</label>
+    <select name="loan" required>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select><br><br>
+
+    <label>Contact Type</label>
+    <select name="contact" required>
+        <option value="cellular">Cellular</option>
+        <option value="telephone">Telephone</option>
+        <option value="unknown">Unknown</option>
+    </select><br><br>
+
+    <label>Last Contact Day</label>
+    <input type="number" name="day" min="1" max="31" required><br><br>
+
+    <label>Last Contact Month</label>
+    <select name="month" required>
+        <option value="jan">January</option>
+        <option value="feb">February</option>
+        <option value="mar">March</option>
+        <option value="apr">April</option>
+        <option value="may">May</option>
+        <option value="jun">June</option>
+        <option value="jul">July</option>
+        <option value="aug">August</option>
+        <option value="sep">September</option>
+        <option value="oct">October</option>
+        <option value="nov">November</option>
+        <option value="dec">December</option>
+    </select><br><br>
+
+    <label>Call Duration (seconds)</label>
+    <input type="number" name="duration" required><br><br>
+
+    <label>Number of Contacts During Campaign</label>
+    <input type="number" name="campaign" required><br><br>
+
+    <label>Days Since Previous Contact</label>
+    <input type="number" name="pdays" required><br><br>
+
+    <label>Number of Previous Contacts</label>
+    <input type="number" name="previous" required><br><br>
+
+    <label>Previous Campaign Outcome</label>
+    <select name="poutcome" required>
+        <option value="failure">Failure</option>
+        <option value="success">Success</option>
+        <option value="other">Other</option>
+        <option value="unknown">Unknown</option>
+    </select><br><br>
+
+    <input type="submit" value="Predict Subscription">
+
+</form>
+
+<h2>THE PREDICTION IS {{ results }}</h2>
+</body>
+</html>
