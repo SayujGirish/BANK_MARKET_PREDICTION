@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Customer Subscription Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <form action="{{ url_for('predict_datapoint') }}" method="post">
+    <div class="container">
+    <form action="{{ url_for('predict_datapoint') }}" method="post" class="prediction-form">
 
     <h2>Customer Details</h2>
 
+    <div class="form-section">
+    <h3>Customer Information</h3>
+    <div class="form-group">
     <label>Age</label>
-    <input type="number" name="age" required><br><br>
+    <input type="number" name="age" min="18" required>
+    </div>
 
+    <div class="form-group">
     <label>Job</label>
     <select name="job" required>
         <option value="admin.">Admin</option>
@@ -27,54 +34,75 @@
         <option value="technician">Technician</option>
         <option value="unemployed">Unemployed</option>
         <option value="unknown">Unknown</option>
-    </select><br><br>
+    </select>
+    </div>
 
+    <div class="form-group">
     <label>Marital Status</label>
     <select name="marital" required>
         <option value="married">Married</option>
         <option value="single">Single</option>
         <option value="divorced">Divorced</option>
-    </select><br><br>
+    </select>
+    </div>
 
+    <div class="form-group">
     <label>Education</label>
     <select name="education" required>
         <option value="primary">Primary</option>
         <option value="secondary">Secondary</option>
         <option value="tertiary">Tertiary</option>
         <option value="unknown">Unknown</option>
-    </select><br><br>
+    </select>
+    </div>
 
+    <div class="form-group">
     <label>Credit in Default</label>
     <select name="default" required>
         <option value="yes">Yes</option>
         <option value="no">No</option>
-    </select><br><br>
+    </select>
+    </div>
 
+    <div class="form-group">
     <label>Average Yearly Balance</label>
-    <input type="number" name="balance" required><br><br>
+    <input type="number" name="balance" min="0" required>
+    </div>
 
+    <div class="form-group">
     <label>Housing Loan</label>
     <select name="housing" required>
         <option value="yes">Yes</option>
         <option value="no">No</option>
-    </select><br><br>
+    </select>
+    </div>
 
+    <div class="form-group">
     <label>Personal Loan</label>
     <select name="loan" required>
         <option value="yes">Yes</option>
         <option value="no">No</option>
-    </select><br><br>
+    </select>
+    </div>
+    </div>
 
+    <div class="form-section">
+    <h3>Contact Information</h3>
+    <div class="form-group">
     <label>Contact Type</label>
     <select name="contact" required>
         <option value="cellular">Cellular</option>
         <option value="telephone">Telephone</option>
         <option value="unknown">Unknown</option>
-    </select><br><br>
+    </select>
+    </div>
 
+    <div class="form-group">
     <label>Last Contact Day</label>
-    <input type="number" name="day" min="1" max="31" required><br><br>
+    <input type="number" name="day" min="1" max="31" required>
+    </div>
 
+    <div class="form-group">
     <label>Last Contact Month</label>
     <select name="month" required>
         <option value="jan">January</option>
@@ -89,32 +117,51 @@
         <option value="oct">October</option>
         <option value="nov">November</option>
         <option value="dec">December</option>
-    </select><br><br>
+    </select>
+    </div>
 
+    <div class="form-group">
     <label>Call Duration (seconds)</label>
-    <input type="number" name="duration" required><br><br>
+    <input type="number" name="duration" min="0" required>
+    </div>
+    </div>
 
+    <div class="form-section">
+    <h3>Campaign Information</h3>
+    <div class="form-group">
     <label>Number of Contacts During Campaign</label>
-    <input type="number" name="campaign" required><br><br>
+    <input type="number" name="campaign" min="0" required>
+    </div>
 
+    <div class="form-group">
     <label>Days Since Previous Contact</label>
-    <input type="number" name="pdays" required><br><br>
+    <input type="number" name="pdays" min="-1" required>
+    </div>
 
+    <div class="form-group">
     <label>Number of Previous Contacts</label>
-    <input type="number" name="previous" required><br><br>
+    <input type="number" name="previous" min="0" required>
+    </div>
 
+    <div class="form-group">
     <label>Previous Campaign Outcome</label>
     <select name="poutcome" required>
         <option value="failure">Failure</option>
         <option value="success">Success</option>
         <option value="other">Other</option>
         <option value="unknown">Unknown</option>
-    </select><br><br>
+    </select>
+    </div>
+    </div>
 
     <input type="submit" value="Predict Subscription">
 
 </form>
 
-<h2>THE PREDICTION IS {{ results }}</h2>
+{% if results %}
+<h2 class="prediction-result">THE PREDICTION IS {{ results }}</h2>
+{% endif %}
+
+</div>
 </body>
 </html>
